@@ -1,4 +1,3 @@
-#include <math.h>
 #include <stdio.h>
 
 #include <SPI.h>
@@ -33,11 +32,10 @@ void disp(int freq, bool catStatus, bool txStatus)
 
   display.setCursor(0,SCREEN_HEIGHT/2 + 2);
   if(catStatus)
-    display.print("CAT OK"); 
+    display.print("CAT:OK  "); 
   else
-    display.print("CAT(!)"); 
+    display.print("CAT:--  "); 
 
-  display.setCursor(TXRX_OFFSET, SCREEN_HEIGHT/2 + 2);
   if(txStatus)
     display.print("TX"); 
   else

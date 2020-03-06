@@ -4,6 +4,11 @@ void setup() {
   Wire.begin();
 
   Serial.begin(9600);
+  Serial.println("            ");
+  Serial.print("Sketch:   "); Serial.println(__FILE__);
+  Serial.print("Uploaded: "); Serial.println(__DATE__);
+  Serial.println(" ");
+  
   while(!Serial);
   Serial.println("I2C Scanner");
 
@@ -46,6 +51,6 @@ void loop() {
   else
     Serial.println("done");
  
-  delay(5000);  
+  delay(3000);  
 
 }

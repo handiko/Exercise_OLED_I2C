@@ -1,32 +1,14 @@
 #include <Wire.h>
 
-void setup() {
-  Wire.begin();
-
-  Serial.begin(9600);
-  Serial.println("            ");
-  Serial.print("Sketch:   "); Serial.println(__FILE__);
-  Serial.print("Uploaded: "); Serial.println(__DATE__);
-  Serial.println(" ");
-  
-  while(!Serial);
-  Serial.println("I2C Scanner");
-
-}
-
-void loop() {
-  byte error, address;
-  int nDevice;
-
+void scan()
+{
   Serial.println("Scanning... ");
 
-  nDevice = 0;
-  for(address = 1; address < 127; address++)
+  for(byte address = 1; address < 127; address++)
   {
     Wire.beginTransmission(address);
-    error = Wire.endTransmission();
 
-    if (error == 0)
+    if (Wire.endTransmission() == 0)
     {
       Serial.print("I2C device found at address 0x");
       if (address<16)
@@ -34,23 +16,30 @@ void loop() {
         
       Serial.print(address,HEX);
       Serial.println("  !");
- 
-      nDevice++;
     }
-    else if (error==4)
-    {
-      Serial.print("Unknown error at address 0x");
-      if (address<16)
-        Serial.print("0");
-      Serial.println(address,HEX);
-    }    
   }
 
-  if (nDevice == 0)
-    Serial.println("No I2C devices found");
-  else
-    Serial.println("done");
- 
-  delay(3000);  
+  Serial.println("done");
+}
 
+void setup() {
+  Wire.begin();
+
+  Serial.begin(9600);
+
+  while(!Serial);
+  
+  Serial.println("            ");
+  Serial.print("Sketch:   "); Serial.println(__FILE__);
+  Serial.print("Uploaded: "); Serial.println(__DATE__);
+  Serial.println("            ");
+  
+  Serial.println("I2C Scanner");
+
+  scan();
+  
+}
+
+void loop() {
+  
 }

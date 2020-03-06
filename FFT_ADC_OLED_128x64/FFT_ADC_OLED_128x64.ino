@@ -73,7 +73,7 @@ void drawSpectrum()
     display.setCursor(0,16);
   }
 
-  int dat=0;
+  double dat;
 
   for(int i=0; i<SCREEN_WIDTH; i++)
   {
@@ -87,9 +87,11 @@ void drawSpectrum()
               + sqrt(pow(vReal[(i+1)/(SCREEN_WIDTH/(SAMPLES/2))],2) + pow(vImag[(i+1)/(SCREEN_WIDTH/(SAMPLES/2))],2)))
               / 2;
     }
+
+    dat = 20*log10(dat);
     
     display.drawLine( i, SCREEN_HEIGHT-1,
-                      i, SCREEN_HEIGHT-1 - dat/2,
+                      i, SCREEN_HEIGHT-1 - (int)(dat),
                       WHITE);
   }
 
